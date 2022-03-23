@@ -115,7 +115,11 @@ var createTable_ = function() {
     },
 
     dataRange: function() {
-      return this.baseRange().getDataRegion();
+      const baseRange = this.baseRange();
+      const dataRegion = baseRange.getDataRegion();
+      const startRow = baseRange.getRow(), endRow = dataRegion.getLastRow();
+      const startCol = dataRegion.getColumn(), endCol = dataRegion.getLastColumn();
+      return this.sheet().getRange(startRow, startCol, endRow + 1 - startRow, endCol + 1 - startCol);
     },
 
     rangeByRow: function(row_) {
